@@ -1,4 +1,7 @@
 #include <stdio.h>
+/*
+This Code explains armstrong numbers
+*/
 int main(){
     int x;
     int a;
