@@ -239,6 +239,65 @@ int distbtwnodes(node* root,int n1,int n2){
     int d2=finddist(lca,n2,0);
     return d1+d2;
 }
+void flatten(node* root){
+    if(root==NULL || (root->left ==NULL) && (root->right==NULL)){
+        return;
+    }
+    if(root->left !=NULL){
+        flatten(root->left);
+        node* temp=root->right;
+        root->right=root->left;
+        root->left=NULL;
+        node* t=root->right;
+        while(t->right !=NULL){
+            t=t->right;
+        }
+        t->right=temp;
+    }
+    flatten(root->right);
+}
+void printsubtrees(node* root,int k){
+if(root==NULL || k<0){
+    return ;
+}
+if(k==0){
+    cout<<root->data<<" ";
+    return;
+}
+printsubtrees(root->left,k-1);
+printsubtrees(root->right,k-1);
+}
+int printnodesatk(node* root,node* target,int k){
+    if(root==NULL){
+        return -1;
+    }
+    if(root==target){
+        printsubtrees(root,k);
+        return 0;
+    }
+    int dl=printnodesatk(root->left,target,k);
+    if(dl != -1){
+        if(dl+1==k){
+            cout<<root->data<<" ";
+        }
+        else{
+            printsubtrees(root->right,k-dl-2);
+        }
+        return 1+dl;
+    }
+    int dr = printnodesatk(root->right,target,k);
+    if(dr != -1){
+        if(dr+1==k){
+            cout<<root->data<<" ";
+        }
+        else{
+            printsubtrees(root->left,k-dr-2);
+        }
+        return 1+dr;
+    }
+}
+    
+
 int main(){
     struct node*root=new node(1);
     root->left=new node(2);
@@ -247,6 +306,6 @@ int main(){
     root->left->right=new node(5);
     root->right->left=new node(6);
     root->right->right=new node(7);
-   rightview(root);
+  printsubtrees(root,2);
     return 0;
 }

@@ -239,6 +239,23 @@ int distbtwnodes(node* root,int n1,int n2){
     int d2=finddist(lca,n2,0);
     return d1+d2;
 }
+void flatten(node* root){
+    if(root==NULL || (root->left ==NULL) && (root->right==NULL)){
+        return;
+    }
+    if(root->left !=NULL){
+        flatten(root->left);
+        node* temp=root->right;
+        root->right=root->left;
+        root->left=NULL;
+        node* t=root->right;
+        while(t->right !=NULL){
+            t=t->right;
+        }
+        t->right=temp;
+    }
+    flatten(root->right);
+}
 int main(){
     struct node*root=new node(1);
     root->left=new node(2);
@@ -247,6 +264,7 @@ int main(){
     root->left->right=new node(5);
     root->right->left=new node(6);
     root->right->right=new node(7);
-   rightview(root);
+   flatten(root);
+   inorder(root);
     return 0;
 }

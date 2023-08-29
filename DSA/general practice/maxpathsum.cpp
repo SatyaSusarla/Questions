@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <climits>
 using namespace std;
 struct node{
     int data;
@@ -239,6 +240,39 @@ int distbtwnodes(node* root,int n1,int n2){
     int d2=finddist(lca,n2,0);
     return d1+d2;
 }
+void flatten(node* root){
+    if(root==NULL || (root->left ==NULL) && (root->right==NULL)){
+        return;
+    }
+    if(root->left !=NULL){
+        flatten(root->left);
+        node* temp=root->right;
+        root->right=root->left;
+        root->left=NULL;
+        node* t=root->right;
+        while(t->right !=NULL){
+            t=t->right;
+        }
+        t->right=temp;
+    }
+    flatten(root->right);
+}
+int maxpathsumuntil(node* root,int& ans){
+    if(root==NULL){
+        return 0;
+    }
+    int left=maxpathsumuntil(root->left,ans);
+    int right=maxpathsumuntil(root->right,ans);
+    int nodemax=max(max(root->data,root->data +left+right),max(root->data +left,root->data +right));
+    ans=max(ans,nodemax);
+    int singlepathsum=max(root->data,max(root->data +left,root->data +right));
+    return singlepathsum;
+}
+int maxpathsum(node*root){
+    int ans=INT_MIN;
+    maxpathsumuntil(root,ans);
+    return ans;
+}
 int main(){
     struct node*root=new node(1);
     root->left=new node(2);
@@ -247,6 +281,7 @@ int main(){
     root->left->right=new node(5);
     root->right->left=new node(6);
     root->right->right=new node(7);
-   rightview(root);
+  
+   maxpathsum(root);
     return 0;
 }
