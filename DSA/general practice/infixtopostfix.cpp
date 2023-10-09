@@ -50,5 +50,5 @@ string infixtopostfix(string s){
     return res;
 }
 int main(){
-cout<<infixtopostfix("(a-b/c)*(a/k-l)")<<endl;
+cout<<infixtopostfix("a+b+c")<<endl;
 }

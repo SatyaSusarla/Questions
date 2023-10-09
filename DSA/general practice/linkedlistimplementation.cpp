@@ -114,16 +114,28 @@ void removecycle(node* &head){
     }
     slow->next=NULL;
 }
+void insertatpos(node *&head,int y,int pos){
+    node* temp=head;
+    int count=0;
+    while(count!=pos-1){
+        temp=temp->next;
+        count++;
+        }
+    cout<<temp->data<<endl;
+    node* n=new node(y);
+    node* x=temp->next;
+    temp->next=n;
+    n->next=x;
+}
 int main(){
  node* head=NULL;
 
-insertattail(head,1);
+insertathead(head,1);
 insertathead(head,2);
 insertathead(head,3);
-insertattail(head,4);
-reversek(head,2);
+insertathead(head,4);
+insertatpos(head,5,2);
 display(head);
-node* newhead=reverse(head);
-display(newhead);
+
     return 0;
 }
