@@ -1,0 +1,6 @@
+cd foldername
+cd ..
+git status
+git add .
+git commit -m "Commit_name"
+git push
