@@ -42,6 +42,6 @@ if(st.empty()){
 }
 }
 int main(){
-    paranthesis("]");
+    paranthesis("(()");
     return 0;
 }
