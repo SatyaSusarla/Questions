@@ -76,6 +76,6 @@ int zerooneknapsack(int value[], int wt[], int n, int w){
    return max(zerooneknapsack(value,wt, n-1, w-wt[n-1])+value[n-1], zerooneknapsack(value, wt ,n-1,w));
 }
 int main(){
-    prntprmutations("abc","");
+    prntsubs("abc","");
 return 0;
 }
