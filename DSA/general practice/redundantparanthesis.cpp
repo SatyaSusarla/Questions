@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++>
 using namespace std;
 
 bool checkRedundancy(string& str)

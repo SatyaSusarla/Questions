@@ -35,7 +35,7 @@ string infixtopostfix(string s){
             }
         }
         else{
-            while(!st.empty() && prec(st.top())>prec(s[i])){
+            while(!st.empty() && prec(st.top())>=prec(s[i])){
                 res+=st.top();
                 st.pop();
             }
@@ -50,5 +50,5 @@ string infixtopostfix(string s){
     return res;
 }
 int main(){
-cout<<infixtopostfix("a+b+c")<<endl;
+cout<<infixtopostfix("(a+b)/c")<<endl;
 }

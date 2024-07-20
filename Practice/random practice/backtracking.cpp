@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 bool issafe(int** arr, int x, int y, int n){
-    if(x<n && y<<n && arr[x][y]==1){
+    if(x<n && y<n && arr[x][y]==1){
         return true;
 
     }
@@ -13,8 +13,6 @@ bool ratinmaze(int** arr,int x,int y, int n,int** solarr){
     solarr[x][y]=1;
     return true;
    }
-   
-   
     if(issafe(arr,x,y,n)){
         solarr[x][y]=1;
         if(ratinmaze(arr,x+1,y,n,solarr)){
